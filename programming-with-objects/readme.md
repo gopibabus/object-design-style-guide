@@ -163,8 +163,8 @@ $client1 = EmailClient::create('gmail', '3302');
 
 class EmailClient
 {
-    public const string CLIENT_NAME;
-    public const int PORT_NUMBER;
+    public const string CLIENT_NAME = 'gmail';
+    public const int PORT_NUMBER = 3302;
 }
 
 $port = EmailClient::PORT_NUMBER;
@@ -212,3 +212,37 @@ $immutableObj->increase();//Doesn't change the state of the object instead retur
 ```
 
 ## Behavior
+
+> Besides state, an object also has behaviors that its clients can make use of. These behaviors are defined as methods ob Object's class.
+
+> Behavior defined in public methods
+
+```php
+
+class EmailClient
+{
+    private string $clientName;
+    
+    public function __construct(string $clientName)
+    {
+        $this->setClientName($clientName);
+    }
+    
+   private function setClientName(string $name)
+   {
+        $this->clientName = $name;
+   }
+   
+   public function getClientObj(string $name)
+   {
+        return new /stdClass($name);
+   }
+}
+
+$client = new EmailClient('gmail');
+$client->getClientObj();
+
+```
+
+## Dependencies
+
