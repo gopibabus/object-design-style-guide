@@ -453,5 +453,5 @@ class Orders
 
 ```
 
-> **Note**
+> **Note** :
 > Using subclasses to change the behavior of Objects is often not recommended. In most situations it's better to use polymorphism with an interface parameter type.
