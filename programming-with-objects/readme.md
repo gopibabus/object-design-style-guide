@@ -246,3 +246,164 @@ $client->getClientObj();
 
 ## Dependencies
 
+If Object **Foo** needs **Bar** to perform part of its job, **Bar** is called a dependency of **Foo**. There are different ways to make **Foo** has access to the **Bar** dependency.
+1. It could instantiate **Bar** itself.
+2. It could fetch a **Bar** instance from known location.
+3. It could get a **Bar** instance injected upon construction.
+
+```php
+
+# 1st Method
+class Email
+{
+    public function send(): void
+    {
+        $logger = new Logger();
+        logger.debug('...');
+    }
+}
+
+# 2nd Method
+class Email
+{
+    public function send(): void
+    {
+        $logger = ServiceLocator.getLogger();
+        logger.debug('...');
+    }
+}
+
+# 3rd Method
+class Email
+{
+    private Logger $logger;
+    
+    public function __construct(Logger $logger): void
+    {
+        $this->logger = $logger
+    }
+    
+    public function send(): void
+    {
+        $this->logger.debug('...');
+    }
+}
+
+```
+
+## Inheritance
+
+### Interfaces
+* We can have a class with no properties and no methods, but only method signatures. Such a class is usually called an **interface**.
+* A **class** can the implement **interface** and provide the actual implementations of the methods that were defined in the **interface**.
+
+```php
+
+interface Email
+{
+    public function send(): void
+}
+
+class Gmail implements Email
+{
+    public function send(): void
+    {
+        //implementation
+    }
+}
+
+```
+
+### Abstract Classes
+* An **interface** doesn't provide any implementation, by an **abstract class** does.
+* An **Abstract class** allows you to provide the implementation for some methods any only the signature for some other methods.
+* An **Abstract class** can't be instantiated. But has to be extended by a class that provides implementations for the abstract methods.
+
+```php
+
+abstract class Email
+{
+    public function prepare()
+    {
+        //Prepare email client
+    }
+    
+    public function send(): void
+}
+
+class Gmail extends Email
+{
+    public function send(): void
+    {
+        //send email to users
+    }
+}
+
+```
+
+### Extend and Override
+
+* A class could provide a full implementation foa ll its methods but allow other classes to **extend and override some of its methods**.
+* Classes that extend from another class have access to **public and protected methods** of the parent class.
+* **Sub Classes** can only **override protected and public methods** of a parent class.
+
+```php
+
+class Email
+{
+    protected function prepare()
+    {
+        //Prepare email client
+    }
+    
+    public function send(): void
+    {
+        //send email to users
+    }
+    
+    private function receive(): void
+    {
+        //send email to users
+    }
+}
+
+class Gmail extends Email
+{
+    public function prepare()
+    {
+        //Prepare gmail client
+    }
+    
+    public function clone()
+    {
+        //Allowed
+        $this->prepare();
+        
+        //Allowed
+        $this->send();
+        
+        //Error
+        $this->receive();
+    }
+}
+
+```
+
+### Final Class
+> We can actively prevent developers to extend from our classes by adding **final** keyword in front of the class.
+
+```php
+
+final class Gmail
+{
+    //...
+}
+
+//Throws error
+class Outlook extends Gmail
+{
+    //...
+}
+```
+
+## Polymorphism
