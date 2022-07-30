@@ -137,7 +137,7 @@ $client2 = EmailClient::create();
 
 > An Object can contain data. At a give moment of time the data inside an object is referred as **state**. Data will be stored in properties. A property will have a name and type.
 
-> Defining properties and assigning values
+### Defining properties and assigning values
 
 ```php
 
@@ -157,7 +157,7 @@ $client1 = EmailClient::create('gmail', '3302');
 
 ```
 
-> Defining constants
+### Defining constants
 
 ```php
 
@@ -170,7 +170,7 @@ class EmailClient
 $port = EmailClient::PORT_NUMBER;
 ```
 
-> Mutable vs Immutable Objects
+### Mutable vs Immutable Objects
 
 ```php
 
@@ -407,3 +407,50 @@ class Outlook extends Gmail
 ```
 
 ## Polymorphism
+
+> **Polymorphism** means that if a parameter has a certain class as its type, any object that is an instance of that class can be provided as a valid argument.
+
+```php
+
+interface Email {
+    public function send(): void;
+}
+
+class Gmail {
+    public function send(): void
+    {
+        ...
+    }
+}
+
+class Orders
+{
+    public function sendConfirmation(Email $mail){
+        $mail.send();
+    }
+}
+
+```
+
+```php
+abstract class Email {
+    public function send(): void;
+}
+
+class Gmail extends Email {
+    public function send(): void
+    {
+        ...
+    }
+}
+
+class Orders
+{
+    public function sendConfirmation(Email $mail){
+        $mail.send();
+    }
+}
+
+```
+
+> **NOTE**: Using subclasses to change the behavior of Objects is often not recommended. In most situations it's better to use polymorphism with an interface parameter type.
