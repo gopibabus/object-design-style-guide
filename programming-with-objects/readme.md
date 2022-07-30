@@ -213,9 +213,9 @@ $immutableObj->increase();//Doesn't change the state of the object instead retur
 
 ## Behavior
 
-> Besides state, an object also has behaviors that its clients can make use of. These behaviors are defined as methods ob Object's class.
+* Besides state, an object also has behaviors that its clients can make use of. These behaviors are defined as methods ob Object's class.
 
-> Behavior defined in public methods
+* Behavior defined in public methods
 
 ```php
 
@@ -247,6 +247,7 @@ $client->getClientObj();
 ## Dependencies
 
 If Object **Foo** needs **Bar** to perform part of its job, **Bar** is called a dependency of **Foo**. There are different ways to make **Foo** has access to the **Bar** dependency.
+
 1. It could instantiate **Bar** itself.
 2. It could fetch a **Bar** instance from known location.
 3. It could get a **Bar** instance injected upon construction.
@@ -295,6 +296,7 @@ class Email
 
 ### Interfaces
 * We can have a class with no properties and no methods, but only method signatures. Such a class is usually called an **interface**.
+
 * A **class** can the implement **interface** and provide the actual implementations of the methods that were defined in the **interface**.
 
 ```php
@@ -316,7 +318,9 @@ class Gmail implements Email
 
 ### Abstract Classes
 * An **interface** doesn't provide any implementation, by an **abstract class** does.
+
 * An **Abstract class** allows you to provide the implementation for some methods any only the signature for some other methods.
+
 * An **Abstract class** can't be instantiated. But has to be extended by a class that provides implementations for the abstract methods.
 
 ```php
@@ -344,7 +348,9 @@ class Gmail extends Email
 ### Extend and Override
 
 * A class could provide a full implementation foa ll its methods but allow other classes to **extend and override some of its methods**.
+
 * Classes that extend from another class have access to **public and protected methods** of the parent class.
+
 * **Sub Classes** can only **override protected and public methods** of a parent class.
 
 ```php
