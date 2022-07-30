@@ -455,3 +455,30 @@ class Orders
 
 > **Note** :
 > Using subclasses to change the behavior of Objects is often not recommended. In most situations it's better to use polymorphism with an interface parameter type.
+
+## Composition
+
+* Assigning an Object to another Object's property is called **Object composition**. You are building up more complicated Objects out of simpler Objects.
+
+* **Object Composition** can ve combined with Polymorphism to compose your Object out of Other Objects, whose(interface) type you know, but not the actual class.
+
+* Composition can be used with a service Object, making part of its behavior configurable. It can also be used with other types of objects, like entities(models), where composition is used for related child elements.
+
+```php
+
+final class Order
+{
+    private array $lines;
+    
+    public function __construct(array $lines){
+        $this->lines = $lines;
+    }
+}
+
+```
+
+> **Note**:
+> An Order Object that contains Line Objects could use composition to establish that relationship between an Order and its lines. In that case a client might provide not a single Line Object but a collection of Line Objects.
+
+## Class Organization
+
