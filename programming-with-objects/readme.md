@@ -488,3 +488,9 @@ final class Order
 
 ## Class Organization
 
+* Programming languages offer varying options for organizing classes: directories, namespaces, components, modules, packages etc. 
+
+* Sometimes the language even offers ways to keep classes private to the module or package they are in. Just like with property and method scopes, this can help reduce the potential coupling surface between modules.
+
+> **Warning**: 
+> This book doesn't contain specific rules for organizing classes in to larger groups. It focuses on design rules for class themselves.
