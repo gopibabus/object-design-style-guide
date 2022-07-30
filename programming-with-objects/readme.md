@@ -560,7 +560,7 @@ $email = new Email();
 
 try {
     $email->send();
-} catch(ResourceNotFoundException $exception) {
+} catch(Exception $exception) {
     $this->json(['status' => $exception->getMessage()], 404);
 }
 
@@ -578,4 +578,43 @@ final class ResourceNotFoundException extends Exception {
     }
 }
 
+```
+
+## Unit Testing
+
+* In order to see whether our classes/Objects behaving as expected, we should write a script that instantiates our object, calls one of its methods and compares the result to some written expectation.
+
+* **Unit Testing Frameworks** supports this type of Scripted Approach. A framework will look for classes of a specific type(test classes). It will then instantiate each test class, and call each of its methods that are marked as test(methods with @test annotation).
+
+> **Note**:
+> The basic structure of each test method is **Arrange-Act-Assert**.
+
+1. **Arrange**: Bring the Object that we are testing in to certain known state.
+2. **Act**: Call on of its methods.
+3. **Assert**: Make some assertions about the end state.
+
+```php
+
+class Calculator
+{
+
+    public function addition(int $a, int $b): int
+    {
+        return $a + $b;    
+    }
+
+}
+
+class CalculatorTest extends TestCase
+{
+
+    public function testAdditionReturningNumber(int $a, int $b): int
+    {
+        $calc = new Calculator();
+        $result = $calc->addition(12, 4);
+        
+        $this->assertEquals(16, $result);
+    }
+
+}
 ```
