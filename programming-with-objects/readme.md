@@ -494,3 +494,88 @@ final class Order
 
 > **Warning**: 
 > This book doesn't contain specific rules for organizing classes in to larger groups. It focuses on design rules for class themselves.
+
+## Return statements and Exceptions
+
+### Return statement
+
+* When you call a method, it will normally be executed statement by statement from the top until a **return** statement is encountered, or the end of the method is reached.
+
+* If at some point you want **to prevent further execution of a method**, you can insert a **return** statement, making sure the rest of the method is skipped.
+
+```php
+
+final class Email {
+
+    public function send(): void
+    {
+        if($status !== true) {
+            return;
+        }
+        ...
+    }
+    
+    public function status(): bool
+    {
+        if($queueStatus !== true) {
+            return false;
+        }
+        ...
+    }
+}
+
+```
+
+### Exceptions
+
+* Another way to **stop execution** of a method is to `throw an exception`. 
+
+* An exception is a special kind of Object that, when instantiated, collects information about where the object was instantiated and what happened before (stack trace).
+
+* Normally an exception indicates some kind of failure, such as
+  * The wrong method arguments were provided.
+  * A map has no value for the given key.
+  * Some external service in unreachable.
+
+```php
+
+final class Email {
+
+    public function send(): void
+    {
+        if($status !== true) {
+            throw new ResourceNotFoundException('Please provide valid entity');
+        }
+        ...
+    }
+} 
+
+```
+
+> A Client can recover  from the exception if it uses **try/catch** block.
+
+```php
+
+$email = new Email();
+
+try {
+    $email->send();
+} catch(ResourceNotFoundException $exception) {
+    $this->json(['status' => $exception->getMessage()], 404);
+}
+
+```
+
+* Programming languages comes with their own built-in set of exception classes(_Exception_). We can define our own exception classes(_ResourceNotFoundException_) by extending built-in exception classes.
+
+```php
+
+final class ResourceNotFoundException extends Exception {
+
+    public function getMessage(): void
+    {
+        ...
+    }
+}
+
+```
