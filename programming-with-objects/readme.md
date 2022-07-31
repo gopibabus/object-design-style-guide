@@ -618,3 +618,59 @@ class CalculatorTest extends TestCase
 
 }
 ```
+
+## Dynamic Arrays
+
+> **Dynamic Arrays** can be used to define list or maps without specifying types for its keys and values.
+
+### Dynamic Arrays as a List
+
+> A **list** is a collection of values with particular Order. A list can be looped over, and you can retrieve a specific value by its index(integer).
+
+```php
+
+$listOfColors = ['red', 'blue', 'green'];
+
+# Looping over list
+foreach ($listOfColors as $key => $value) {
+    ...
+}
+
+# If key is irrelevant
+foreach ($listOfColors as $color) {
+    ...
+}
+
+# Retrieving the value at a specific index
+$color1 = $listOfColors[0];
+$color2 = $listOfColors[1];
+
+# Adding item to the list
+$listOfColors[] = 'yellow';
+
+```
+
+### Dynamic Arrays as a Map
+
+> A **Map** is also a collection of values, but the values have no particular order. Instead, each value can be added to the map with particular key, which is a `string`.
+
+```php
+
+$mapOfCustomer = [
+    'name' => 'gopi',
+    'from' => 'india'
+];
+
+# Looping over a Map
+foreach ($mapOfCustomer as $key => $value) {
+    ...
+}
+
+# Retrieving the value at a specific index
+$name = $mapOfCustomer['name'];
+$country = $mapOfCustomer['from'];
+
+# Adding item to the Map
+$mapOfCustomer['profession'] = 'Software Engineer';
+
+```
